@@ -122,7 +122,7 @@ const serial = async (
                 // >> você deve ter o aquario de id 1 cadastrado.
                 await poolBancoDados.execute(
                     'INSERT INTO logsensor (temperatura1, temperatura2, temperatura3, temperatura4, temperatura5, umidade1, umidade2, umidade3, umidade4, umidade5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                    [umidade, temperatura, umidade1, temperatura1, umidade2, temperatura2, umidade3, temperatura3, umidade4, temperatura4]
+                    [temperatura, temperatura1, temperatura2, temperatura3, temperatura4, umidade, umidade1, umidade2, umidade3, umidade4]
                 );
                 console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
 
