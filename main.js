@@ -19,11 +19,16 @@ const HABILITAR_OPERACAO_INSERIR = true;
 const AMBIENTE = 'desenvolvimento';
 
 const serial = async (
-    valoresDht11Umidade,
-    valoresDht11Temperatura,
-    valoresLuminosidade,
-    valoresLm35Temperatura,
-    valoresChave
+        valoresumidade,
+        valorestemperatura,
+        valoresumidade1,
+        valorestemperatura1,
+        valoresumidade2,
+        valorestemperatura2,
+        valoresumidade3,
+        valorestemperatura3,
+        valoresumidade4,
+        valorestemperatura4
 ) => {
     let poolBancoDados = ''
 
@@ -71,7 +76,7 @@ const serial = async (
         const umidade3 = parseInt(valores[6]);
         const temperatura3 = parseInt(valores[7]);
         const umidade4 = parseInt(valores[8]);
-        const temperatura5 = parseInt(valores[9]);
+        const temperatura4 = parseInt(valores[9]);
         
         valoresumidade.push(umidadeProjeto);
         valorestemperatura.push(temperaturaProjeto);
@@ -116,8 +121,8 @@ const serial = async (
                 // Este insert irá inserir dados de fk_aquario id=1 (fixo no comando do insert abaixo)
                 // >> você deve ter o aquario de id 1 cadastrado.
                 await poolBancoDados.execute(
-                    'INSERT INTO medida (dht11_umidade, dht11_temperatura, luminosidade, lm35_temperatura, chave, momento, fk_aquario) VALUES (?, ?, ?, ?, ?, now(), 1)',
-                    [dht11Umidade, dht11Temperatura, luminosidade, lm35Temperatura, chave]
+                    'INSERT INTO logsensor (temperatura1, temperatura2, temperatura3, temperatura4, temperatura5, umidade1, umidade2, umidade3, umidade4, umidade5) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                    [umidade, temperatura, umidade1, temperatura1, umidade2, temperatura2, umidade3, temperatura3, umidade4, temperatura4]
                 );
                 console.log("valores inseridos no banco: ", dht11Umidade + ", " + dht11Temperatura + ", " + luminosidade + ", " + lm35Temperatura + ", " + chave)
 
@@ -167,23 +172,38 @@ const servidor = (
 }
 
 (async () => {
-    const valoresDht11Umidade = [];
-    const valoresDht11Temperatura = [];
-    const valoresLuminosidade = [];
-    const valoresLm35Temperatura = [];
-    const valoresChave = [];
+    const valoresumidade = [];
+    const valorestemperatura = [];
+    const valoresumidade1 = [];
+    const valorestemperatura1 = [];
+    const valoresumidade2 = [];
+    const valorestemperatura2 = [];
+    const valoresumidade3 = [];
+    const valorestemperatura3 = [];
+    const valoresumidade4 = [];
+    const valorestemperatura4 = [];
     await serial(
-        valoresDht11Umidade,
-        valoresDht11Temperatura,
-        valoresLuminosidade,
-        valoresLm35Temperatura,
-        valoresChave
+        valoresumidade,
+        valorestemperatura,
+        valoresumidade1,
+        valorestemperatura1,
+        valoresumidade2,
+        valorestemperatura2,
+        valoresumidade3,
+        valorestemperatura3,
+        valoresumidade4,
+        valorestemperatura4
     );
     servidor(
-        valoresDht11Umidade,
-        valoresDht11Temperatura,
-        valoresLuminosidade,
-        valoresLm35Temperatura,
-        valoresChave
+        valoresumidade,
+        valorestemperatura,
+        valoresumidade1,
+        valorestemperatura1,
+        valoresumidade2,
+        valorestemperatura2,
+        valoresumidade3,
+        valorestemperatura3,
+        valoresumidade4,
+        valorestemperatura4
     );
 })();
